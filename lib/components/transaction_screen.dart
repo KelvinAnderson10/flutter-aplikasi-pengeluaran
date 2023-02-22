@@ -14,7 +14,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    List<String> dates = ["22 Feb 2023", "22 Feb 2023", "22 Feb 2023", "22 Feb 2023"];
+    List<String> dates = ["Today", "22 Feb 2023", "22 Feb 2023", "22 Feb 2023"];
     List<String> transactions = ["Moon Chicken", "Sate Taichan", "Babi bakar"];
 
     Widget buildTransaction(String transaction){
@@ -49,7 +49,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
       //   title: Text("22 Februari 2023"),
       // );
       return Container(
-        margin: EdgeInsets.only(top: 14),
+        margin: EdgeInsets.only(top: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,7 +80,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
           right: 0,
           bottom: 0,
           child: Container(
-            padding: EdgeInsets.all(kDefaultPadding),
+            // padding: EdgeInsets.all(kDefaultPadding),
             child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
