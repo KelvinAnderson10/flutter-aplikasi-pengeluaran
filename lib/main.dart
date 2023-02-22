@@ -59,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -87,34 +86,40 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         // extendBody: true,
         appBar: AppBar(
-          toolbarHeight: 80,
-          elevation: 0,
-          // leading: SvgPicture.asset(dompetLogo),
-          // title: Text(
-          //   titleAppBar[currentTab],
-          //   style: TextStyle(fontWeight: FontWeight.w600),
-          // ),
-          actions: <Widget>[
-            Container(
-              margin: EdgeInsets.only(right: 20),
-              child: Row(children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Hello Kelvin"),
-                    Text("Hello Kelvin"),
-                  ],
+            // toolbarHeight: 80,
+            elevation: 0,
+            // leading: SvgPicture.asset(dompetLogo),
+            title: Row(
+              children: [
+                Image.asset("assets/dompet.png", height: 20,),
+                SizedBox(width: 12,),
+                Text(
+                  titleAppBar[currentTab],
+                  style: TextStyle(fontWeight: FontWeight.w600),
                 ),
-                SizedBox(width: 10,),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [CircleAvatar()],
-                )
-              ]),
+              ],
             )
-          ],
-          // centerTitle: true,
-        ),
+            // actions: <Widget>[
+            //   Container(
+            //     margin: EdgeInsets.only(right: 20),
+            //     child: Row(children: [
+            //       Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Text("Hello Kelvin"),
+            //           Text("Hello Kelvin"),
+            //         ],
+            //       ),
+            //       SizedBox(width: 10,),
+            //       Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [CircleAvatar()],
+            //       )
+            //     ]),
+            //   )
+            // ],
+            // centerTitle: true,
+            ),
         body: buildPageView(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
