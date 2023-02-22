@@ -1,4 +1,5 @@
-import 'package:course_app/components/history_screen.dart';
+import 'package:course_app/components/bottom_navigation_bar.dart';
+import 'package:course_app/components/transaction_screen.dart';
 import 'package:course_app/components/home_screen.dart';
 import 'package:course_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -6,27 +7,23 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        textTheme: GoogleFonts.rubikTextTheme(),
-        appBarTheme: const AppBarTheme(
-            backgroundColor: kPrimaryColor,
-            systemOverlayStyle:
-                SystemUiOverlayStyle(statusBarColor: kPrimaryColor)),
-      ),
-      home: const MyHomePage(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          textTheme: GoogleFonts.rubikTextTheme(),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: kPrimaryColor,
+              systemOverlayStyle:
+                  SystemUiOverlayStyle(statusBarColor: kPrimaryColor)),
+        ),
+        home: MyHomePage());
   }
 }
 
@@ -37,76 +34,95 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _index = 0;
-  final pages = <Widget>[
-    const HomeScreen(),
-    const HistoryScreen(),
-    const HomeScreen(),
-    const HomeScreen(),
-  ];
+  int currentTab = 0;
+
+  PageController pageController =
+      PageController(initialPage: 0, keepPage: true);
+
+  Widget buildPageView() {
+    return PageView(
+      physics: const NeverScrollableScrollPhysics(),
+      controller: pageController,
+      onPageChanged: (index) {
+        pageChanged(index);
+      },
+      children: [
+        HomeScreen(
+          onTapNavigate: bottomTapped,
+        ),
+        TransactionScreen(),
+        HomeScreen(),
+        HomeScreen(),
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void pageChanged(int index) {
+    setState(() {
+      currentTab = index;
+    });
+  }
+
+  void bottomTapped(int index) {
+    setState(() {
+      currentTab = index;
+      //   pageController.animateToPage(index,
+      // duration: Duration(milliseconds: 500), curve: Curves.ease);
+      pageController.jumpToPage(index);
+    });
+  }
+
+  final titleAppBar = ["Overview", "Transaction", "Dashboard", "Profile"];
+
+  bool isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[_index],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: kPrimaryColor,
-        child: IconButton(
-          icon: const Icon(Icons.add),
-          onPressed: () {},
-          tooltip: 'Tambah Transaksi Baru',
+        // extendBody: true,
+        appBar: AppBar(
+          toolbarHeight: 80,
+          elevation: 0,
+          // leading: SvgPicture.asset(dompetLogo),
+          // title: Text(
+          //   titleAppBar[currentTab],
+          //   style: TextStyle(fontWeight: FontWeight.w600),
+          // ),
+          actions: <Widget>[
+            Container(
+              margin: EdgeInsets.only(right: 20),
+              child: Row(children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Hello Kelvin"),
+                    Text("Hello Kelvin"),
+                  ],
+                ),
+                SizedBox(width: 10,),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [CircleAvatar()],
+                )
+              ]),
+            )
+          ],
+          // centerTitle: true,
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 5,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Expanded(
-                  child: IconButton(
-                icon: const Icon(Icons.home),
-                onPressed: () => {
-                  setState(() => {_index = 0})
-                },
-                color: _index == 0 ? kPrimaryColor : Colors.grey,
-              )),
-              Expanded(
-                  child: IconButton(
-                icon: const Icon(
-                  Icons.receipt_long,
-                ),
-                onPressed: () => {
-                  setState(() => {_index = 1})
-                },
-                color: _index == 1 ? kPrimaryColor : Colors.grey,
-              )),
-              const Expanded(child: SizedBox()),
-              Expanded(
-                  child: IconButton(
-                icon: const Icon(
-                  Icons.leaderboard,
-                ),
-                onPressed: () => {
-                  setState(() => {_index = 2})
-                },
-                color: _index == 2 ? kPrimaryColor: Colors.grey,
-              )),
-              Expanded(
-                  child: IconButton(
-                icon: const Icon(
-                  Icons.person,
-                ),
-                onPressed: () => {
-                  setState(() => {_index = 3})
-                },
-                color: _index == 3 ? kPrimaryColor : Colors.grey,
-              )),
-            ],
-          )),
-    );
+        body: buildPageView(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: kPrimaryColor,
+          child: const Icon(Icons.add),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar:
+            MyBottomNavigationBar(onTapped: bottomTapped, index: currentTab));
   }
 }

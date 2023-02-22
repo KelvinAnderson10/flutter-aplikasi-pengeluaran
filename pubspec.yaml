@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
   flutter_launcher_icons: ^0.11.0
+  flutter_svg: ^1.1.6
 
 flutter_icons:
     image_path: "assets/icon6.png"
@@ -67,6 +68,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/rupiah.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
