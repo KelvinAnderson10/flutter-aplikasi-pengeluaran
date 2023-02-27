@@ -16,7 +16,6 @@ class _TransactionScreenState extends State<TransactionScreen> {
     Size size = MediaQuery.of(context).size;
     List<String> dates = ["Today", "22 Feb 2023", "22 Feb 2023", "22 Feb 2023"];
     List<String> transactions = ["Moon Chicken", "Sate Taichan", "Babi bakar"];
-
     Widget buildTransaction(String transaction){
       return Container(
         margin: EdgeInsets.symmetric(vertical: 8),
@@ -24,7 +23,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
         width: size.width * 0.85,
         decoration: BoxDecoration(
           color: Color(0xFFf1f1fa),
-          borderRadius: BorderRadius.circular(24)
+          borderRadius: BorderRadius.circular(10)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -49,6 +48,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
       //   title: Text("22 Februari 2023"),
       // );
       return Container(
+        alignment: Alignment.center,
         margin: EdgeInsets.only(top: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,21 +79,23 @@ class _TransactionScreenState extends State<TransactionScreen> {
           left: 0,
           right: 0,
           bottom: 0,
-          child: Container(
-            // padding: EdgeInsets.all(kDefaultPadding),
-            child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-              for (final item in dates)
-                buildDate(item)
-            ])),
+          child: Column(children: [Container(
+            // padding: EdgeInsets.only(top: kDefaultPadding,),
+            child: ListView.builder(
+              physics: BouncingScrollPhysics(),
+                primary: false,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+              itemCount: dates.length,
+              itemBuilder: ((context, i){
+                return buildDate(dates[i]);
+              })),
             height: size.height * 0.8,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(size.height * 0.04))),
-          ),
+                    top: Radius.circular(10))),
+          )]),
         )
       ]),
     );

@@ -2,6 +2,7 @@ import 'package:course_app/components/bottom_navigation_bar.dart';
 import 'package:course_app/components/transaction_screen.dart';
 import 'package:course_app/components/home_screen.dart';
 import 'package:course_app/constants.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -120,7 +121,12 @@ class _MyHomePageState extends State<MyHomePage> {
             // ],
             // centerTitle: true,
             ),
-        body: buildPageView(),
+        body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            behavior: SnackBarBehavior.floating,
+            duration: Duration(seconds: 2),
+            content: Text("Ketuk sekali lagi untuk keluar")),
+          child: buildPageView()),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           backgroundColor: kPrimaryColor,

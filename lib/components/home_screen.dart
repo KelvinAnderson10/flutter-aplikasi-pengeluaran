@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget with HomeView {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    const numItems = 3;
+    const numItems = 5;
     Widget buildRow(int idx) {
       return ListTile(
         minVerticalPadding: 6,
@@ -50,9 +50,10 @@ class HomeScreen extends StatelessWidget with HomeView {
                   height: size.height * 0.25 - size.height * 0.07,
                   decoration: const BoxDecoration(
                       color: kPrimaryColor,
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(36),
-                          bottomRight: Radius.circular(36))),
+                      // borderRadius: BorderRadius.only(
+                      //     bottomLeft: Radius.circular(36),
+                      //     bottomRight: Radius.circular(36))
+                          ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: size.height * 0.018, left: 18),
@@ -88,7 +89,7 @@ class HomeScreen extends StatelessWidget with HomeView {
                           horizontal: kDefaultPadding),
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
                                 offset: const Offset(0, 5),
