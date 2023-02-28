@@ -18,15 +18,15 @@ class _TransactionScreenState extends State<TransactionScreen> {
     List<String> transactions = ["Moon Chicken", "Sate Taichan", "Babi bakar"];
     Widget buildTransaction(String transaction){
       return Container(
-        margin: EdgeInsets.symmetric(vertical: 8),
+        // margin: EdgeInsets.symmetric(vertical: 8),
         height: size.height * 0.07,
         width: size.width * 0.85,
         decoration: BoxDecoration(
-          color: Color(0xFFf1f1fa),
+          // color: Color(0xFFf1f1fa),
           borderRadius: BorderRadius.circular(10)
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
           Container(
             width: 150,
@@ -35,7 +35,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(transaction, style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0XFF456581)),),
-              Text("Baru Saja", style: TextStyle(fontSize: 12),)
+              Text("14:35", style: TextStyle(fontSize: 12),)
             ],
           )),
           Text("- Rp. 10.000", style: TextStyle(color: Colors.red),)
@@ -53,7 +53,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(date, style: TextStyle(color: Colors.black.withOpacity(0.5), fontSize: 16),),
+            Text(date, style: TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 18),),
+            SizedBox(height: 4,),
             Container(
           child: Column(
             children: [
@@ -72,13 +73,6 @@ class _TransactionScreenState extends State<TransactionScreen> {
     return Scaffold(
       body: Stack(children: [
         Container(
-          height: double.infinity,
-          decoration: BoxDecoration(color: kPrimaryColor),
-        ),
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
           child: Column(children: [Container(
             // padding: EdgeInsets.only(top: kDefaultPadding,),
             child: ListView.builder(
@@ -86,15 +80,15 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 primary: false,
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-              itemCount: dates.length,
+              itemCount: dates.length * 2,
               itemBuilder: ((context, i){
-                return buildDate(dates[i]);
+                if (i.isOdd) return const Divider();
+                final index = i ~/ 2;
+                return buildDate(dates[index]);
               })),
             height: size.height * 0.8,
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(10))),
+                color: Colors.white,),
           )]),
         )
       ]),

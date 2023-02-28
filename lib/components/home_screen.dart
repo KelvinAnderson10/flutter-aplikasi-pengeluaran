@@ -153,6 +153,7 @@ class HomeScreen extends StatelessWidget with HomeView {
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(2),
                 scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
                 child: Wrap(spacing: 16, children: [
                   categoryCard(size),
                   categoryCard(size),
@@ -197,7 +198,8 @@ class HomeScreen extends StatelessWidget with HomeView {
                 itemCount: numItems * 2,
                 itemBuilder: ((context, i) {
                   if (i.isOdd) return const Divider();
-                  final index = i ~/ 2 + 1;
+                  final index = i ~/ 2;
+                  print(index);
                   return buildRow(index);
                 }),
               )),
