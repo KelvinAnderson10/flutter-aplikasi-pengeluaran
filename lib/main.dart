@@ -1,6 +1,6 @@
-import 'package:course_app/components/bottom_navigation_bar.dart';
-import 'package:course_app/components/transaction_screen.dart';
-import 'package:course_app/components/home_screen.dart';
+import 'package:course_app/screens/home_screen.dart';
+import 'package:course_app/screens/transaction_screen.dart';
+import 'package:course_app/widgets/bottom_navigation_bar.dart';
 import 'package:course_app/constants.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +35,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int currentTab = 0;
+  int currentTab = 1;
 
   PageController pageController =
-      PageController(initialPage: 0, keepPage: true);
+      PageController(initialPage: 1, keepPage: false);
+
 
   Widget buildPageView() {
     return PageView(
@@ -52,8 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
           onTapNavigate: bottomTapped,
         ),
         TransactionScreen(),
-        HomeScreen(),
-        HomeScreen(),
+        TransactionScreen(),
+        TransactionScreen(),
       ],
     );
   }
@@ -71,9 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void bottomTapped(int index) {
     setState(() {
-      currentTab = index;
+      // currentTab = index;
       //   pageController.animateToPage(index,
-      // duration: Duration(milliseconds: 500), curve: Curves.ease);
+      // duration: Duration(milliseconds: 1000), curve: Curves.easeIn);
       pageController.jumpToPage(index);
     });
   }
