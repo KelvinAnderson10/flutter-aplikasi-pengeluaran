@@ -1,14 +1,17 @@
-import 'package:course_app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoryCard extends StatelessWidget {
+  const CategoryCard({super.key});
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.18,
-      width: size.width * 0.3,
+      margin: EdgeInsets.symmetric(horizontal: 5.r),
+      height: 120.h,
+      // padding: EdgeInsets.symmetric(vertical: 16.r),
+      width: 110.w,
+      // padding: EdgeInsets.symmetric(horizontal: 6.r),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(4),
@@ -18,31 +21,30 @@ class CategoryCard extends StatelessWidget {
                 blurRadius: 5,
                 color: Colors.grey.withOpacity(0.3)),
           ]),
-      child: Column(children: [
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 24.r,
+            backgroundColor: Colors.orange.withOpacity(0.2),
+            child: Icon(
+              Icons.fastfood,
+              color: Colors.orange,
+            ),
+          ),
         SizedBox(
-          height: size.height * 16 / 780,
-        ),
-        CircularPercentIndicator(
-          radius: size.height * 30/780,
-          lineWidth: 5.0,
-          percent: 0.5,
-          center: Text("100%", style: TextStyle(fontSize: size.height * 14/780),),
-          animation: true,
-          progressColor: kPrimaryColor,
-        ),
-        SizedBox(
-          height: size.height * 14 / 780,
+          height: 12.h,
         ),
         Text(
           "Makanan",
-          style: TextStyle(fontSize: size.height * 16 / 780),
+          style: TextStyle(fontSize: 16.sp),
         ),
         SizedBox(
-          height: size.height * 4 / 780,
+          height: 3.h,
         ),
         Text(
-          "Rp. 30.000",
-          style: TextStyle(fontSize: size.height * 14 / 780, color: Colors.black.withOpacity(0.6)),
+          "Rp. 500.000",
+          style: TextStyle(fontSize: 13.sp, color: Colors.black.withOpacity(0.6)),
         ),
       ]),
     );

@@ -1,30 +1,42 @@
+import 'package:course_app/screens/dashboard_screen.dart';
 import 'package:course_app/screens/home_screen.dart';
+import 'package:course_app/screens/profile_screen.dart';
 import 'package:course_app/screens/transaction_screen.dart';
 import 'package:course_app/widgets/bottom_navigation_bar.dart';
 import 'package:course_app/constants.dart';
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(MyApp());
+  // WidgetsFlutterBinding.ensureInitialized();
+  //   SystemChrome.setPreferredOrientations(
+  //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ScreenUtilInit(
+      builder: (context, child) {
+        return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          textTheme: GoogleFonts.rubikTextTheme(),
+          // textTheme: GoogleFonts.rubikTextTheme(),
+          fontFamily: 'Rubik',
           appBarTheme: const AppBarTheme(
               backgroundColor: kPrimaryColor,
               systemOverlayStyle:
                   SystemUiOverlayStyle(statusBarColor: kPrimaryColor)),
         ),
-        home: MyHomePage());
+        home: child);
+  },
+  child:  const MyHomePage(),
+  );
   }
 }
 
@@ -35,51 +47,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int currentTab = 1;
+  int currentTab = 0;
 
-  PageController pageController =
-      PageController(initialPage: 1, keepPage: false);
+  late dynamic pages = [
+    HomeScreen(onTapNavigate: pageChange),
+    TransactionScreen(),
+    DashboardScreen(),
+    ProfileScreen(),
+  ];
 
-
-  Widget buildPageView() {
-    return PageView(
-      physics: const NeverScrollableScrollPhysics(),
-      controller: pageController,
-      onPageChanged: (index) {
-        pageChanged(index);
-      },
-      children: [
-        HomeScreen(
-          onTapNavigate: bottomTapped,
-        ),
-        TransactionScreen(),
-        TransactionScreen(),
-        TransactionScreen(),
-      ],
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void pageChanged(int index) {
+  void pageChange(int index){
     setState(() {
       currentTab = index;
     });
   }
 
-  void bottomTapped(int index) {
-    setState(() {
-      // currentTab = index;
-      //   pageController.animateToPage(index,
-      // duration: Duration(milliseconds: 1000), curve: Curves.easeIn);
-      pageController.jumpToPage(index);
-    });
-  }
-
-  final titleAppBar = ["Overview", "Transaction", "Dashboard", "Profile"];
+  final titleAppBar = ["MyDompet", "Transaksi", "Dashboard", "Profile"];
 
   bool isDarkMode = false;
 
@@ -122,12 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // ],
             // centerTitle: true,
             ),
-        body: DoubleBackToCloseApp(
-          snackBar: const SnackBar(
-            behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 2),
-            content: Text("Ketuk sekali lagi untuk keluar")),
-          child: buildPageView()),
+        body: pages[currentTab],
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           backgroundColor: kPrimaryColor,
@@ -135,6 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar:
-            MyBottomNavigationBar(onTapped: bottomTapped, index: currentTab));
+            MyBottomNavigationBar(onTapped: pageChange, index: currentTab));
   }
 }

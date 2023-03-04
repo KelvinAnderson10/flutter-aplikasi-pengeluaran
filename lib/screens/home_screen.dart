@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:course_app/widgets/category_card.dart';
 import 'package:course_app/widgets/recent_transaction_card.dart';
 import 'package:course_app/constants.dart';
@@ -30,35 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: size.height * 0.25,
+            height: size.height * 0.18,
             child: Stack(
               children: [
                 Container(
-                  height: size.height * 0.25 - size.height * 0.07,
+                  height: size.height * 0.18 - size.height * 0.07,
                   decoration: const BoxDecoration(
                     color: kPrimaryColor,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: size.height * 0.018, left: size.width * 18 / 360),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Selamat Datang,",
-                          style: GoogleFonts.rubik(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: size.height * 0.022))),
-                      SizedBox(height: size.height * 6 / 780),
-                      Text("Kelvin Anderson",
-                          style: GoogleFonts.rubik(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: size.height * 0.028))),
-                    ],
                   ),
                 ),
                 Positioned(
@@ -69,9 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       // alignment: Alignment.center,
                       height: size.height * 0.14,
                       margin: EdgeInsets.symmetric(
-                          horizontal: size.width * kDefaultPadding / 360),
+                          horizontal: 18.r),
                       padding: EdgeInsets.symmetric(
-                          horizontal: size.width * kDefaultPadding / 360),
+                          horizontal: 18.r),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -85,27 +64,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Image.asset(
                             "assets/rupiah.png",
-                            height: size.height * 1 / 13,
+                            height: 45.h,
                           ),
                           SizedBox(
-                            width: size.width * 16 / 360,
+                            width: 27.w,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(height: size.height * 6 / 780),
+                              SizedBox(height: 6.h),
                               Text(
                                 "Pengeluaran Bulan Ini",
                                 style: TextStyle(
-                                    fontSize: size.height * 0.022,
+                                    fontSize: 16.sp,
                                     color: Colors.black.withOpacity(0.6)),
                               ),
-                              SizedBox(height: size.height * 5 / 780),
+                              SizedBox(height: 4.h),
                               Text(
-                                "Rp 2.500.000,00",
+                                "Rp 2.920.000,00",
                                 style: TextStyle(
-                                    fontSize: size.height * 0.03,
+                                    fontSize: 22.sp,
                                     fontWeight: FontWeight.w600),
                               )
                             ],
@@ -117,12 +96,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(
-            height: size.height * 16 / 780,
+            height: 24.h,
           ),
           Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.symmetric(
-                  horizontal: size.width * kDefaultPadding / 360),
+                  horizontal: 18.r),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -130,20 +109,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Kategori Bulan Ini",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: size.height * 18 / 780),
+                        fontSize: 16.sp),
                   ),
                 ],
               )),
           Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: size.width * kDefaultPadding / 360,
-                  vertical: size.height * kDefaultPadding / 780),
+                  horizontal: 13.r,
+                  vertical: 12.r),
               alignment: Alignment.centerLeft,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(2),
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                child: Wrap(spacing: size.width * 16 / 360, children: [
+                child: Row(children: [
                   CategoryCard(),
                   CategoryCard(),
                   CategoryCard(),
@@ -151,19 +130,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   CategoryCard(),
                 ]),
               )),
+            SizedBox(height: 14.h,),
           Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.symmetric(
-                  horizontal: size.width * kDefaultPadding / 360),
+                  horizontal: 18.r),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     "Transaksi Terakhir",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: size.height * 18 / 780),
+                        fontSize: 16.sp),
                   ),
                   GestureDetector(
                       onTap: () => {widget.onTapNavigate!(1)},
@@ -175,10 +155,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             "Lihat Semua",
                             style: TextStyle(
                                 fontWeight: FontWeight.w100,
-                                fontSize: size.height * 14 / 780),
+                                fontSize: 13.sp),
                           ),
                           SizedBox(
-                            width: size.width * 4 / 360,
+                            width: 4.w,
                           ),
                           Icon(
                             Icons.arrow_forward,

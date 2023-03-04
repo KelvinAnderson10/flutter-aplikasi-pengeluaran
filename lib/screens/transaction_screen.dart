@@ -18,7 +18,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    List<String> dates = ["Today", "22 Feb 2023", "22 Feb 2023", "22 Feb 2023"];
+    List<String> dates = ["Hari Ini", "22 Feb 2023", "22 Feb 2023", "22 Feb 2023"];
     List<String> transactions = ["Moon Chicken", "Sate Taichan", "Babi bakar"];
     Widget buildTransaction(String transaction) {
       return Container(
