@@ -85,7 +85,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
     }
 
     return Scaffold(
-      body: Stack(children: [
+      body: Container(child:
         Column(children: [
           Container(
             // padding: EdgeInsets.only(top: kDefaultPadding,),
@@ -106,7 +106,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 })),
           )
         ]),
-      ]),
+      ),
     );
   }
 }
